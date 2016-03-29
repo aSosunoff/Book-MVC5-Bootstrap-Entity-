@@ -1,0 +1,1 @@
+﻿$('.tool_type_book').tooltip()

@@ -1,8 +1,40 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    background: url("image/body_background.jpg") repeat;
 }
 
+p.btn_add {
+    text-align: center;
+}
+html, body, .main_container {
+    height: 100%;
+}
+p.btn_add a {
+    font-size: 40px;
+    color: #5cb85c;
+}
+
+p.btn_add a:hover, p.btn_add a:focus, p.btn_add a.focus {
+    color: #6bca6b;
+    text-decoration: none;
+}
+
+.tool_type_book:active, .tool_type_book:hover {
+    text-decoration: none;
+}
+
+.book_edit:hover {
+    color: #5cb85c;
+}
+.book_details:hover {
+    color: #b8b55c;
+}
+.book_delete:hover {
+    color: #b85c5c;
+}
+
+.main_container {
+    background-color: #D7D7D7;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;

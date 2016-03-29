@@ -40,7 +40,7 @@ namespace FirstMVC5App.Model.Engine.Servise.Logic
 
         public void Delete(int? id)
         {
-            APP_BOOK appBook = BusinessLayer.Get<IBookBusinessLogic>().GetBook(id);
+            APP_BOOK appBook = GetItem(id);
             BusinessLayer.Get<IHistoryBusinessLogic>().DeleteBook(appBook);
             BusinessLayer.Get<IBookBusinessLogic>().Delete(appBook);
         }

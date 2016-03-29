@@ -1,16 +1,25 @@
 ﻿@model IEnumerable<FirstMVC5App.Model.Models.APP_BOOK>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Книги";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+<p class="btn_add">
+    @Html.ActionLink(" ", 
+                    "Create", 
+                    null, 
+                    new
+                    {
+                        @class = "tool_type_book btn glyphicon glyphicon-plus-sign",
+                        data_toggle = "tooltip",
+                        data_placement = "top",
+                        title = "Добавить новую книгу"
+                    })
 </p>
-<table class="table">
+<table class="table table-striped table-hover ">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.NAME)
@@ -24,23 +33,50 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GANRE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PRICE)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GANRE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRICE)
+            </td>
+            <td>
+                @Html.ActionLink(" ", 
+                                "Edit", 
+                                new { id = item.ID }, 
+                                new {
+                                    @class = "tool_type_book book_edit glyphicon glyphicon-pencil", 
+                                    data_toggle="tooltip", 
+                                    data_placement="top",
+                                    title = String.Format("Редактировать книгу \"{0}\"", item.NAME)
+                                }) |
+                @Html.ActionLink(" ", 
+                                "Details", 
+                                new { id = item.ID }, 
+                                new
+                                {
+                                    @class = "tool_type_book book_details glyphicon glyphicon-file",
+                                    data_toggle = "tooltip",
+                                    data_placement = "top",
+                                    title = String.Format("Просмотреть книгу \"{0}\"", item.NAME)
+                                }) |
+                @Html.ActionLink(" ", 
+                                "Delete", 
+                                new { id = item.ID }, 
+                                new
+                                {
+                                    @class = "tool_type_book book_delete glyphicon glyphicon-trash",
+                                    data_toggle = "tooltip",
+                                    data_placement = "top",
+                                    title = String.Format("Удалить книгу книгу \"{0}\"", item.NAME)
+                                })
+            </td>
+        </tr>
+    }
 
 </table>
