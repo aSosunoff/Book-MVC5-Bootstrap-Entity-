@@ -101,10 +101,12 @@ namespace FirstMVC5App.Controllers
 
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
-        [HttpPost]
-        public ActionResult Delete(APP_BOOK item)
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteId(int? id)
         {
-            ServiceLayer.Get<IBookService>().Delete(item);
+            if (id == null) return RedirectToAction("Index", "Book");
+
+            ServiceLayer.Get<IBookService>().Delete(id);
             //APP_BOOK aPP_BOOK = db.APP_BOOK.Find(id);
             //db.APP_BOOK.Remove(aPP_BOOK);
             //db.SaveChanges();

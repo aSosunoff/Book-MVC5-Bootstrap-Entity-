@@ -34,7 +34,7 @@ namespace FirstMVC5App.Model.Engine.Business.Logic
 
         public bool IsElement(int? id)
         {
-            return id != null && _bookRepository.GetItem(id) != null;
+            return id != null && GetBook(id) != null;
         }
 
         public void Update(APP_BOOK item)

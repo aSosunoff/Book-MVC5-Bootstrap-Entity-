@@ -10,6 +10,6 @@ namespace FirstMVC5App.Model.Engine.Servise.Interface
         APP_BOOK GetItem(int? id);
         bool IsElement(int? id);
         void Update(APP_BOOK item);
-        void Delete(APP_BOOK item);
+        void Delete(int? id);
     }
 }
