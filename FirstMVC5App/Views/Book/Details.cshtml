@@ -1,42 +1,24 @@
 ﻿@model FirstMVC5App.Model.Models.APP_BOOK
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Просмотр";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+@Html.Partial("come_back")
 
-<div>
-    <h4>APP_BOOK</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NAME)
-        </dt>
+<h2>@ViewBag.Title книги "@Html.DisplayTextFor(model => model.NAME)"</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.NAME)
-        </dd>
+<div class="col-lg-offset-4 col-lg-4 form_input">
+    <div class="form-group">
+        <div class="col-lg-6">@Html.DisplayNameFor(model => model.NAME)</div>
+        <div class="col-lg-6">@Html.DisplayFor(model => model.NAME)</div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GANRE)
-        </dt>
+        <div class="col-lg-6">@Html.DisplayNameFor(model => model.GANRE)</div>
+        <div class="col-lg-6">@Html.DisplayFor(model => model.GANRE)</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.GANRE)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PRICE)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PRICE)
-        </dd>
-
-    </dl>
+        <div class="col-lg-6">@Html.DisplayNameFor(model => model.PRICE)</div>
+        <div class="col-lg-6">@Html.DisplayFor(model => model.PRICE)</div>
+        
+        <div class="col-lg-12">@Html.ActionLink("Правка", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary" })</div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

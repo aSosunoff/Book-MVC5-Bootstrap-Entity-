@@ -32,8 +32,19 @@ p.btn_add a:hover, p.btn_add a:focus, p.btn_add a.focus {
     color: #b85c5c;
 }
 
+.main_col_header {
+    padding: 0;
+}
+.navbar {
+    border-radius: 0px;
+}
 .main_container {
     background-color: #D7D7D7;
+}
+.form_input {
+    background-color: #CCCED7;
+    border: 1px solid #BFB5D5;
+    padding-top: 10px;
 }
 /* Set padding to keep content from hitting the edges */
 .body-content {
