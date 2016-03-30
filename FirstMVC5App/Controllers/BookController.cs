@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using FirstMVC5App.Model.Engine.Servise.Interface;
 using FirstMVC5App.Model.Models;
+using Newtonsoft.Json;
 
 namespace FirstMVC5App.Controllers
 {
@@ -34,12 +29,10 @@ namespace FirstMVC5App.Controllers
         //public ActionResult Create([Bind(Include = "ID,NAME,GANRE,PRICE")] APP_BOOK aPP_BOOK)
         public ActionResult Create(APP_BOOK book)
         {
-
             if (ModelState.IsValid)
             {
-                //aPpBook.DATE_REG = DateTime.Now;
-                //_bookRepository.Create(aPP_BOOK);
                 ServiceLayer.Get<IBookService>().Create(book);
+
                 return RedirectToAction("Index");
             }
             //else
@@ -107,9 +100,7 @@ namespace FirstMVC5App.Controllers
             if (id == null) return RedirectToAction("Index", "Book");
 
             ServiceLayer.Get<IBookService>().Delete(id);
-            //APP_BOOK aPP_BOOK = db.APP_BOOK.Find(id);
-            //db.APP_BOOK.Remove(aPP_BOOK);
-            //db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
@@ -119,5 +110,22 @@ namespace FirstMVC5App.Controllers
             //todo: Возможно надо добавить и на остальных уровнях
             base.Dispose(disposing);
         }
+
+
+        #region Test JSON
+        [HttpPost]
+        public string GetBooks()
+        {
+            return JsonConvert.SerializeObject(ServiceLayer.Get<IBookService>().GetList());
+            //return Json(ServiceLayer.Get<IBookService>().GetList(), JsonRequestBehavior.AllowGet);
+            //Просмотреть что за функция
+        }
+
+        [HttpPost]
+        public void SetBooks(string data)
+        {
+            IEnumerable<APP_BOOK> books = JsonConvert.DeserializeObject<IEnumerable<APP_BOOK>>(data);
+        }
+        #endregion
     }
 }
