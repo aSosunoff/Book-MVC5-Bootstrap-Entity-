@@ -1,4 +1,10 @@
-﻿body {
+﻿/*Переход при двойном нажатии на строке в таблице*/
+    .clickable-row {
+        cursor: pointer;
+    }
+/*************************************************/
+
+body {
     background: url("image/body_background.jpg") repeat;
 }
 

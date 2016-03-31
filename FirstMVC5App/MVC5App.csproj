@@ -212,7 +212,8 @@
     <Content Include="Views\Book\Details.cshtml" />
     <Content Include="Views\Book\Edit.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
-    <Content Include="Views\Book\come_back.cshtml" />
+    <Content Include="Views\Book\come_back_partial.cshtml" />
+    <Content Include="Views\Book\DetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

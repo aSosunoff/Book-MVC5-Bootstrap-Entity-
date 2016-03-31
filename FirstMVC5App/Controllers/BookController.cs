@@ -47,6 +47,7 @@ namespace FirstMVC5App.Controllers
             return View(book);
         }
 
+        // TODO: УБРАТЬ ПОВТОРЕНИЕ КОДА
         public ActionResult Details(int? id)
         {
             if (id == null) return RedirectToAction("Index", "Book");
@@ -56,6 +57,17 @@ namespace FirstMVC5App.Controllers
 
             return HttpNotFound();//todo: заменить на свою страницу ошибки
         }
+
+        public ActionResult DetailsPartial(int? id)
+        {
+            if (id == null) return RedirectToAction("Index", "Book");
+
+            if (ServiceLayer.Get<IBookService>().IsElement(id))
+                return PartialView(ServiceLayer.Get<IBookService>().GetItem(id));
+
+            return HttpNotFound();//todo: заменить на свою страницу ошибки сообщить, что нет такой книги
+        }
+        // УБРАТЬ ПОВТОРЕНИЕ КОДА
 
         public ActionResult Edit(int? id)
         {

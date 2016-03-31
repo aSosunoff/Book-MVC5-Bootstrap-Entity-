@@ -5,6 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section scripts{}
+
+@* Информация про модальные окна на Bootstrap *@
+@* http://metanit.com/sharp/mvc5/14.6.php *@
+@* http://bootstrap-3.ru/javascript.php#modals *@
+
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+
 <h2>@ViewBag.Title</h2>
 
 <p class="btn_add">
@@ -36,13 +46,13 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td class="clickable-row" data-href='@Url.Action("Details", "Book", new {id = item.ID})'>
                 @Html.DisplayFor(modelItem => item.NAME)
             </td>
-            <td>
+            <td class="clickable-row" data-href='@Url.Action("Details", "Book", new {id = item.ID})'>
                 @Html.DisplayFor(modelItem => item.GANRE)
             </td>
-            <td>
+            <td class="clickable-row" data-href='@Url.Action("Details", "Book", new {id = item.ID})'>
                 @Html.DisplayFor(modelItem => item.PRICE)
             </td>
             <td>
@@ -56,14 +66,14 @@
                                     title = String.Format("Редактировать книгу \"{0}\"", item.NAME)
                                 }) |
                 @Html.ActionLink(" ", 
-                                "Details", 
+                                "DetailsPartial", 
                                 new { id = item.ID }, 
                                 new
                                 {
                                     @class = "tool_type_book book_details glyphicon glyphicon-file",
                                     data_toggle = "tooltip",
                                     data_placement = "top",
-                                    title = String.Format("Просмотреть книгу \"{0}\"", item.NAME)
+                                    title = String.Format("Быстрый просмотр книги \"{0}\"", item.NAME)
                                 }) |
                 @Html.ActionLink(" ", 
                                 "Delete", 
