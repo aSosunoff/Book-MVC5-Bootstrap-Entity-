@@ -3,18 +3,23 @@
 <div class="modal-content">
     <div class="modal-header">
         <button class="close" data-dismiss="modal" area-hidden="true">X</button>
-        <h4>Книга</h4>
+        <h4>Книга "@Html.DisplayFor(model => model.NAME)"</h4>
     </div>
-    <div class="modal-body">
-        <dl class="dl-horizontal">
-            <dt>Название модели:</dt>
-            <dd>@Html.DisplayFor(model => model.NAME)</dd>
+    <div class="modal-body row">
+        <div class="col-lg-offset-1 col-lg-10 form_input">
+            <div class="form-group">
+                <div class="col-lg-6">@Html.DisplayNameFor(model => model.NAME)</div>
+                <div class="col-lg-6">@Html.DisplayFor(model => model.NAME)</div>
 
-            <dt>Производитель</dt>
-            <dd>@Html.DisplayFor(model => model.GANRE)</dd>
+                <div class="col-lg-6">@Html.DisplayNameFor(model => model.GANRE)</div>
+                <div class="col-lg-6">@Html.DisplayFor(model => model.GANRE)</div>
 
-            <dt>Год выпуска</dt>
-            <dd>@Html.DisplayFor(model => model.PRICE)</dd>
-        </dl>
+                <div class="col-lg-6">@Html.DisplayNameFor(model => model.PRICE)</div>
+                <div class="col-lg-6">@Html.DisplayFor(model => model.PRICE)</div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="col-lg-12">@Html.ActionLink("Правка", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary" })</div>
     </div>
 </div>

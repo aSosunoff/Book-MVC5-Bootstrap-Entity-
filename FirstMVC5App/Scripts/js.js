@@ -13,7 +13,7 @@
     //http://metanit.com/sharp/mvc5/14.6.php
     $('.book_details').click(function (e) {
         $.ajaxSetup({ cache: false});
-        e.preventDefault();
+        e.preventDefault();//https://learn.javascript.ru/default-browser-action
         $.get(this.href, function(data) {
             $('#dialogContent').html(data);
             $('#modDialog').modal('show');
