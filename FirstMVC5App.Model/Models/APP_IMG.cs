@@ -12,24 +12,19 @@ namespace FirstMVC5App.Model.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class APP_BOOK
+    public partial class APP_IMG
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public APP_BOOK()
+        public APP_IMG()
         {
-            this.APP_PURCHASE = new HashSet<APP_PURCHASE>();
+            this.APP_BOOK = new HashSet<APP_BOOK>();
         }
     
         public decimal ID { get; set; }
         public string NAME { get; set; }
-        public string GANRE { get; set; }
-        public Nullable<decimal> PRICE { get; set; }
-        public Nullable<System.DateTime> DATE_REG { get; set; }
-        public Nullable<System.DateTime> DATE_UPDATE { get; set; }
-        public Nullable<decimal> ID_IMG { get; set; }
+        public byte[] IMAGE { get; set; }
     
-        public virtual APP_IMG APP_IMG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<APP_PURCHASE> APP_PURCHASE { get; set; }
+        public virtual ICollection<APP_BOOK> APP_BOOK { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace FirstMVC5App.Model.Engine.Repository.Interface
 {
-    public interface IBookRepository : ICRUDRepository<APP_BOOK>
+    public interface IImgRepository : ICRUDRepository<APP_IMG>
     {
          
     }

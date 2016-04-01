@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FirstMVC5App.Model.Repository.Interface
+namespace FirstMVC5App.Model.Engine.Repository.Interface
 {
     public interface ICRUDRepository<T> where T : class
     {

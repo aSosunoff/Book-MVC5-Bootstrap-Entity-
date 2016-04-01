@@ -62,7 +62,7 @@
                     //}
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    var error = thrownError.length == 0 ? "Обрыв соединения" : thrownError + ". Обрыв соединения";
+                    var error = thrownError.length === 0 ? "Обрыв соединения" : thrownError + ". Обрыв соединения";
                     error += "Url: " + url + "; Data: " + data;
                     //alert(error);                    
                     console.warn(error);

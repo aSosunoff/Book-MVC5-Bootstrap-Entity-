@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using FirstMVC5App.Model.Engine.Servise.Interface;
 using FirstMVC5App.Model.Models;
@@ -123,14 +124,20 @@ namespace FirstMVC5App.Controllers
             base.Dispose(disposing);
         }
 
-
         #region Test JSON
         [HttpPost]
         public string GetBooks()
         {
-            return JsonConvert.SerializeObject(ServiceLayer.Get<IBookService>().GetList());
+            //todo: Прочитать что такое. Было изменено потому что JSON выкидывал исключение с циключной ссылкой
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            return JsonConvert.SerializeObject(ServiceLayer.Get<IBookService>().GetList(), Formatting.None, jsSettings);
+
             //return Json(ServiceLayer.Get<IBookService>().GetList(), JsonRequestBehavior.AllowGet);
-            //Просмотреть что за функция
+            //todo: Просмотреть что за функция
         }
 
         [HttpPost]

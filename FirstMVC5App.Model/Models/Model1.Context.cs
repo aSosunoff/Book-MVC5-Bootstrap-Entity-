@@ -27,6 +27,7 @@ namespace FirstMVC5App.Model.Models
     
         public virtual DbSet<APP_BOOK> APP_BOOK { get; set; }
         public virtual DbSet<APP_HISTORY> APP_HISTORY { get; set; }
+        public virtual DbSet<APP_IMG> APP_IMG { get; set; }
         public virtual DbSet<APP_PURCHASE> APP_PURCHASE { get; set; }
         public virtual DbSet<APP_USER> APP_USER { get; set; }
     }

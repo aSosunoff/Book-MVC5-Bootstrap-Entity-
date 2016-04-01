@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
-using FirstMVC5App.Model.Models;
+
 
 namespace FirstMVC5App.Model.Infrastructure
 {
@@ -17,17 +13,17 @@ namespace FirstMVC5App.Model.Infrastructure
             //Использование данного метода происходит из за вывода сообщения об ошибки на английском языке
             //http://professorweb.ru/my/ASP_NET/mvc/level7/7_5.php
 
-            string priceValue = (string) bindingContext.ValueProvider.GetValue("PRICE").ConvertTo(typeof (string));
-            decimal price;
-            //todo: Поменять на проверку без использования out параметра
-            if (!(decimal.TryParse(priceValue, out price)) //Прверяем ввели число или нет
-                &&
-                !(String.IsNullOrEmpty(priceValue))) //Исключаем пустую строку. Так как проверку на пустоту осуществляет DefaultModelBinder
-            {
-                bindingContext.ModelState.AddModelError("PRICE", "Не допустимые символы");
-                return base.BindModel(controllerContext, bindingContext);
-            }
-
+            //Проверяем цену на лишние символы
+                string priceValue = (string)bindingContext.ValueProvider.GetValue("PRICE").ConvertTo(typeof(string));
+                decimal price;
+                //todo: Поменять на проверку без использования out параметра
+                if (!(decimal.TryParse(priceValue, out price)) //Прверяем ввели число или нет
+                    &&
+                    !(String.IsNullOrEmpty(priceValue))) //Исключаем пустую строку. Так как проверку на пустоту осуществляет DefaultModelBinder
+                {
+                    bindingContext.ModelState.AddModelError("PRICE", "Не допустимые символы");
+                    return base.BindModel(controllerContext, bindingContext);
+                }
             return base.BindModel(controllerContext,  bindingContext);
             
         }

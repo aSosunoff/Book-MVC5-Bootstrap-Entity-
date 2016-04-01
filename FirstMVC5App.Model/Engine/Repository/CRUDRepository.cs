@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using FirstMVC5App.Model.Repository.Interface;
+using FirstMVC5App.Model.Engine.Repository.Interface;
 
 namespace FirstMVC5App.Model.Repository
 {
