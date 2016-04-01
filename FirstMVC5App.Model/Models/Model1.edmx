@@ -15,7 +15,8 @@
           <Property Name="PRICE" Type="float" Precision="126" Scale="0" />
           <Property Name="DATE_REG" Type="date" />
           <Property Name="DATE_UPDATE" Type="date" />
-          <Property Name="ID_IMG" Type="number" Precision="38" Scale="0" />
+          <Property Name="IMG_NAME" Type="varchar2" MaxLength="100" />
+          <Property Name="IMG_FILE_PATH" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="APP_HISTORY">
           <Key>
@@ -24,14 +25,6 @@
           <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="OPERATION" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="ID_BOOK" Type="number" Precision="38" Scale="0" Nullable="false" />
-        </EntityType>
-        <EntityType Name="APP_IMG">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="NAME" Type="varchar2" MaxLength="100" />
-          <Property Name="IMAGE" Type="long raw" />
         </EntityType>
         <EntityType Name="APP_PURCHASE">
           <Key>
@@ -49,18 +42,6 @@
           <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NAME" Type="varchar2" MaxLength="20" />
         </EntityType>
-        <Association Name="APP_BOOK_FK1">
-          <End Role="APP_IMG" Type="Self.APP_IMG" Multiplicity="0..1" />
-          <End Role="APP_BOOK" Type="Self.APP_BOOK" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="APP_IMG">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="APP_BOOK">
-              <PropertyRef Name="ID_IMG" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="APP_PURCHASE_FK1">
           <End Role="APP_USER" Type="Self.APP_USER" Multiplicity="0..1" />
           <End Role="APP_PURCHASE" Type="Self.APP_PURCHASE" Multiplicity="*" />
@@ -88,13 +69,8 @@
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="APP_BOOK" EntityType="Self.APP_BOOK" Schema="TEST" store:Type="Tables" />
           <EntitySet Name="APP_HISTORY" EntityType="Self.APP_HISTORY" Schema="TEST" store:Type="Tables" />
-          <EntitySet Name="APP_IMG" EntityType="Self.APP_IMG" Schema="TEST" store:Type="Tables" />
           <EntitySet Name="APP_PURCHASE" EntityType="Self.APP_PURCHASE" Schema="TEST" store:Type="Tables" />
           <EntitySet Name="APP_USER" EntityType="Self.APP_USER" Schema="TEST" store:Type="Tables" />
-          <AssociationSet Name="APP_BOOK_FK1" Association="Self.APP_BOOK_FK1">
-            <End Role="APP_IMG" EntitySet="APP_IMG" />
-            <End Role="APP_BOOK" EntitySet="APP_BOOK" />
-          </AssociationSet>
           <AssociationSet Name="APP_PURCHASE_FK1" Association="Self.APP_PURCHASE_FK1">
             <End Role="APP_USER" EntitySet="APP_USER" />
             <End Role="APP_PURCHASE" EntitySet="APP_PURCHASE" />
@@ -111,13 +87,8 @@
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="APP_BOOK" EntityType="Model.APP_BOOK" />
           <EntitySet Name="APP_HISTORY" EntityType="Model.APP_HISTORY" />
-          <EntitySet Name="APP_IMG" EntityType="Model.APP_IMG" />
           <EntitySet Name="APP_PURCHASE" EntityType="Model.APP_PURCHASE" />
           <EntitySet Name="APP_USER" EntityType="Model.APP_USER" />
-          <AssociationSet Name="APP_BOOK_FK1" Association="Model.APP_BOOK_FK1">
-            <End Role="APP_IMG" EntitySet="APP_IMG" />
-            <End Role="APP_BOOK" EntitySet="APP_BOOK" />
-          </AssociationSet>
           <AssociationSet Name="APP_PURCHASE_FK2" Association="Model.APP_PURCHASE_FK2">
             <End Role="APP_BOOK" EntitySet="APP_BOOK" />
             <End Role="APP_PURCHASE" EntitySet="APP_PURCHASE" />
@@ -137,8 +108,8 @@
           <Property Name="PRICE" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="DATE_REG" Type="DateTime" />
           <Property Name="DATE_UPDATE" Type="DateTime" />
-          <Property Name="ID_IMG" Type="Decimal" Precision="38" Scale="0" />
-          <NavigationProperty Name="APP_IMG" Relationship="Model.APP_BOOK_FK1" FromRole="APP_BOOK" ToRole="APP_IMG" />
+          <Property Name="IMG_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IMG_FILE_PATH" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="APP_PURCHASE" Relationship="Model.APP_PURCHASE_FK2" FromRole="APP_BOOK" ToRole="APP_PURCHASE" />
         </EntityType>
         <EntityType Name="APP_HISTORY">
@@ -148,15 +119,6 @@
           <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OPERATION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ID_BOOK" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-        </EntityType>
-        <EntityType Name="APP_IMG">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IMAGE" Type="Binary" MaxLength="2147483647" FixedLength="false" />
-          <NavigationProperty Name="APP_BOOK" Relationship="Model.APP_BOOK_FK1" FromRole="APP_IMG" ToRole="APP_BOOK" />
         </EntityType>
         <EntityType Name="APP_PURCHASE">
           <Key>
@@ -177,18 +139,6 @@
           <Property Name="NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="APP_PURCHASE" Relationship="Model.APP_PURCHASE_FK1" FromRole="APP_USER" ToRole="APP_PURCHASE" />
         </EntityType>
-        <Association Name="APP_BOOK_FK1">
-          <End Type="Model.APP_IMG" Role="APP_IMG" Multiplicity="0..1" />
-          <End Type="Model.APP_BOOK" Role="APP_BOOK" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="APP_IMG">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="APP_BOOK">
-              <PropertyRef Name="ID_IMG" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="APP_PURCHASE_FK2">
           <End Type="Model.APP_BOOK" Role="APP_BOOK" Multiplicity="1" />
           <End Type="Model.APP_PURCHASE" Role="APP_PURCHASE" Multiplicity="*" />
@@ -222,7 +172,8 @@
           <EntitySetMapping Name="APP_BOOK">
             <EntityTypeMapping TypeName="Model.APP_BOOK">
               <MappingFragment StoreEntitySet="APP_BOOK">
-                <ScalarProperty Name="ID_IMG" ColumnName="ID_IMG" />
+                <ScalarProperty Name="IMG_FILE_PATH" ColumnName="IMG_FILE_PATH" />
+                <ScalarProperty Name="IMG_NAME" ColumnName="IMG_NAME" />
                 <ScalarProperty Name="DATE_UPDATE" ColumnName="DATE_UPDATE" />
                 <ScalarProperty Name="DATE_REG" ColumnName="DATE_REG" />
                 <ScalarProperty Name="PRICE" ColumnName="PRICE" />
@@ -237,15 +188,6 @@
               <MappingFragment StoreEntitySet="APP_HISTORY">
                 <ScalarProperty Name="ID_BOOK" ColumnName="ID_BOOK" />
                 <ScalarProperty Name="OPERATION" ColumnName="OPERATION" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="APP_IMG">
-            <EntityTypeMapping TypeName="Model.APP_IMG">
-              <MappingFragment StoreEntitySet="APP_IMG">
-                <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

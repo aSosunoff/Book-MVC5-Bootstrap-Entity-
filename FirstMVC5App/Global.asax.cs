@@ -21,7 +21,6 @@ namespace FirstMVC5App
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             ModelBinders.Binders.Add(typeof(APP_BOOK), new BookModelBinder());
-            ModelBinders.Binders.Add(typeof(APP_IMG), new ImgModelBinder());
         }
     }
 }

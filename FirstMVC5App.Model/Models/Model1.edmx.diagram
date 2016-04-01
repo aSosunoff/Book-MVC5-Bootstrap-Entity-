@@ -6,11 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="b630753ae52f446c8a78226aa8dcbd2a" Name="Diagram1">
         <EntityTypeShape EntityType="Model.APP_BOOK" Width="1.5" PointX="0.5" PointY="0.5" />
-        <EntityTypeShape EntityType="Model.APP_HISTORY" Width="1.5" PointX="6.625" PointY="0.5" />
-        <EntityTypeShape EntityType="Model.APP_IMG" Width="1.5" PointX="0.5" PointY="4" />
-        <EntityTypeShape EntityType="Model.APP_PURCHASE" Width="1.5" PointX="2.625" PointY="0.5" />
-        <EntityTypeShape EntityType="Model.APP_USER" Width="1.5" PointX="4.625" PointY="0.5" />
-        <AssociationConnector Association="Model.APP_BOOK_FK1" />
+        <EntityTypeShape EntityType="Model.APP_HISTORY" Width="1.5" PointX="9.75" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.APP_PURCHASE" Width="1.5" PointX="3.25" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.APP_USER" Width="1.5" PointX="5.375" PointY="0.5" />
         <AssociationConnector Association="Model.APP_PURCHASE_FK2" />
         <AssociationConnector Association="Model.APP_PURCHASE_FK1" />
       </Diagram>

@@ -67,15 +67,10 @@
     <Compile Include="Engine\Business\Interface\IBusinessLayer.cs" />
     <Compile Include="Engine\Business\Interface\IBookBusinessLogic.cs" />
     <Compile Include="Engine\Business\Interface\IHistoryBusinessLogic.cs" />
-    <Compile Include="Engine\Business\Interface\IImgBusinessLogic.cs" />
     <Compile Include="Engine\Business\Logic\BookBusinessLogic.cs" />
     <Compile Include="Engine\Business\Logic\HistoryBusinessLogic.cs" />
-    <Compile Include="Engine\Business\Logic\ImgBusinessLogic.cs" />
     <Compile Include="Engine\EngineObject.cs" />
     <Compile Include="Engine\IEngineObject.cs" />
-    <Compile Include="Engine\Repository\Entity\ImgRepository.cs" />
-    <Compile Include="Engine\Repository\Interface\IImgRepository.cs" />
-    <Compile Include="Infrastructure\ImgModelBinder.cs" />
     <Compile Include="Models\APP_HISTORY.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -88,10 +83,6 @@
     <Compile Include="Models\APP_BOOK.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\APP_IMG.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\APP_IMG_Partial.cs" />
     <Compile Include="Models\APP_PURCHASE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

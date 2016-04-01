@@ -26,9 +26,9 @@ namespace FirstMVC5App.Model.Models
         public Nullable<decimal> PRICE { get; set; }
         public Nullable<System.DateTime> DATE_REG { get; set; }
         public Nullable<System.DateTime> DATE_UPDATE { get; set; }
-        public Nullable<decimal> ID_IMG { get; set; }
+        public string IMG_NAME { get; set; }
+        public string IMG_FILE_PATH { get; set; }
     
-        public virtual APP_IMG APP_IMG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<APP_PURCHASE> APP_PURCHASE { get; set; }
     }

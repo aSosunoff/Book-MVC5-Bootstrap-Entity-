@@ -28,29 +28,21 @@ namespace FirstMVC5App.Model.Models
         [Display(Name = "Жанр")]
         public string GANRE { get; set; }
 
-        //[CurrencyValid(DataType.Currency, ErrorMessage = "Ошибка")]
-        //[CurrencyValid(ErrorMessage = "Меньше 5")]
-        //[DataType(DataType.Currency, ErrorMessage = "Ошибка в стоимости")]
-        //todo: ДОБАВИТЬ СВОЮ ПРОВЕРКУ ДОСТОВЕРНОСТИ
-        //http://professorweb.ru/my/ASP_NET/mvc/level7/7_5.php
-        //[RegularExpression(@"^(\d+)$|^(\d+,?\d+)$")]
         [Required (ErrorMessage = "Необходимо заполнить поле")]
         [Display(Name = "Стоимость")]
-        public decimal PRICE { get; set; }
+        public Nullable<decimal> PRICE { get; set; }
 
         [ScaffoldColumn(false)]
         public Nullable<System.DateTime> DATE_REG { get; set; }
 
         [ScaffoldColumn(false)]
         public Nullable<System.DateTime> DATE_UPDATE { get; set; }
+
+        [Display(Name = "Название изображение")]
+        public string IMG_NAME { get; set; }
+
+        [Display(Name = "Изображение")]
+        [DataType(DataType.Url)]
+        public string IMG_FILE_PATH { get; set; }
     }
-
-
-    //public class CurrencyValidAttribute : RequiredAttribute
-    //{
-    //    public override bool IsValid(object value)
-    //    {
-    //        return value != null ? false : true ; //base.IsValid(value) && ((decimal)value) > 5;
-    //    }
-    //}
 }

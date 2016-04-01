@@ -15,14 +15,14 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="col-lg-offset-2 col-lg-4">
         <div class="form-group">
-            @Html.LabelFor(model => model.APP_IMG.NAME, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.APP_IMG.NAME, new { htmlAttributes = new { @class = "form-control", placeholder = "Введите название картинки" } })
-            @Html.ValidationMessageFor(model => model.APP_IMG.NAME, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.IMG_NAME, htmlAttributes: new {@class = "control-label"})
+            @Html.EditorFor(model => model.IMG_NAME, new { htmlAttributes = new { @class = "form-control", placeholder = "Введите название изображения" } })
+            @Html.ValidationMessageFor(model => model.IMG_NAME, "", new {@class = "text-danger"})
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.APP_IMG.IMAGE, htmlAttributes: new { @class = "control-label" })
-            @Html.TextBoxFor(model => model.APP_IMG.IMAGE, new { @class = "form-control", type = "file" })
-            @Html.ValidationMessageFor(model => model.APP_IMG.IMAGE, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.IMG_FILE_PATH, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.IMG_FILE_PATH, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+            @Html.ValidationMessageFor(model => model.IMG_FILE_PATH, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="col-lg-4">

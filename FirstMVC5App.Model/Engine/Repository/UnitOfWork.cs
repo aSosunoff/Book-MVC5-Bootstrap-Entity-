@@ -12,7 +12,6 @@ namespace FirstMVC5App.Model.Engine.Repository
         {
             Objects.Add(typeof(IBookRepository), new BookRepository(_entityDb));
             Objects.Add(typeof(IHistoryRepository), new HistoryRepository(_entityDb));
-            Objects.Add(typeof(IImgRepository), new ImgRepository(_entityDb));
         }
     }
 }

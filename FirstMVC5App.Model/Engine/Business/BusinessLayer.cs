@@ -11,7 +11,6 @@ namespace FirstMVC5App.Model.Engine.Business
         {
             Objects.Add(typeof(IBookBusinessLogic), new BookBusinessLogic(unitOfWork.Get<IBookRepository>()));
             Objects.Add(typeof(IHistoryBusinessLogic), new HistoryBusinessLogic(unitOfWork.Get<IHistoryRepository>()));
-            Objects.Add(typeof(IImgBusinessLogic), new ImgBusinessLogic(unitOfWork.Get<IImgRepository>()));
         }   
     }
 }
