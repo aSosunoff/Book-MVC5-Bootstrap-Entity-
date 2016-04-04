@@ -1,4 +1,5 @@
-﻿@model IEnumerable<FirstMVC5App.Model.Models.APP_BOOK>
+﻿@using FirstMVC5App.Component.Helpers
+@model IEnumerable<FirstMVC5App.Model.Models.APP_BOOK>
 
 @{
     ViewBag.Title = "Книги";
@@ -48,8 +49,7 @@
     {
         <tr>
             <td class="clickable-row" data-href='@Url.Action("Details", "Book", new {id = item.ID})'>
-                @* :todo пемянять на Хелпер *@
-                <img src="@Url.Content(item.IMG_FILE_PATH)" class="img-thumbnail img-responsive center-block" alt="Responsive image" />
+                @Html.DisplayImage(new{src = item.IMG_FILE_PATH, @class = "img-thumbnail img-responsive center-block", alt = "Responsive image"})
             </td>
             <td class="clickable-row" data-href='@Url.Action("Details", "Book", new {id = item.ID})'>
                 @Html.DisplayFor(modelItem => item.NAME)

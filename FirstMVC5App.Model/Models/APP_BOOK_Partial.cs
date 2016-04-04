@@ -42,7 +42,6 @@ namespace FirstMVC5App.Model.Models
         public string IMG_NAME { get; set; }
 
         [Display(Name = "Изображение")]
-        [DataType(DataType.Url)]
         public string IMG_FILE_PATH { get; set; }
     }
 }

@@ -71,6 +71,7 @@
     <Compile Include="Engine\Business\Logic\HistoryBusinessLogic.cs" />
     <Compile Include="Engine\EngineObject.cs" />
     <Compile Include="Engine\IEngineObject.cs" />
+    <Compile Include="Infrastructure\FileOfWork.cs" />
     <Compile Include="Models\APP_HISTORY.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -1,4 +1,5 @@
-﻿@model FirstMVC5App.Model.Models.APP_BOOK
+﻿@using FirstMVC5App.Component.Helpers
+@model FirstMVC5App.Model.Models.APP_BOOK
 @{
     ViewBag.Title = "Просмотр";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,7 +9,12 @@
 
 <h2>@ViewBag.Title книги "@Html.DisplayTextFor(model => model.NAME)"</h2>
 
-<div class="col-lg-offset-4 col-lg-4 form_input">
+
+<div class="col-lg-offset-2 col-lg-4">
+    @Html.DisplayImage(new { src= Model.IMG_FILE_PATH, @class = "img-thumbnail img-responsive center-block", alt = "Responsive image" })
+    @* todo: разобраться с хелпером for *@
+</div>
+<div class="col-lg-4 form_input">
     <div class="form-group">
         <div class="col-lg-6">@Html.DisplayNameFor(model => model.NAME)</div>
         <div class="col-lg-6">@Html.DisplayFor(model => model.NAME)</div>

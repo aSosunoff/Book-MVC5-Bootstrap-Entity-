@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using FirstMVC5App.Model.Engine.Business.Interface;
 using FirstMVC5App.Model.Engine.Repository.Interface;
 using FirstMVC5App.Model.Models;
@@ -45,6 +47,10 @@ namespace FirstMVC5App.Model.Engine.Business.Logic
 
         public void Delete(APP_BOOK item)
         {
+            //:todo имя файла по дефолту употребляется строкой уже 2 раз. Необходимо обойти это что бы не ошибиться при написании
+            string filePath = String.IsNullOrEmpty(item.IMG_FILE_PATH) ? String.Empty : Path.Combine(HttpContext.Current.Server.MapPath(item.IMG_FILE_PATH));
+            if (File.Exists(filePath) && Path.GetFileName(filePath) != "default.png")
+                File.Delete(filePath);
             _bookRepository.Delete(item);
         }
     }

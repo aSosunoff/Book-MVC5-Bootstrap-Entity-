@@ -14,22 +14,10 @@ namespace FirstMVC5App.Model.Infrastructure
                 case "IMG_FILE_PATH":
                     //http://stackoverflow.com/questions/2083645/how-can-i-use-a-modelbinder-to-correct-values-that-will-then-be-visible-to-the-u
                     //Формируем путь до файла и сохраняем
-                    //string fileValue = (string) bindingContext.ValueProvider.GetValue("IMG_FILE_PATH").ConvertTo(typeof (string));
 
-                    HttpPostedFileBase file = (HttpPostedFileBase)bindingContext.ValueProvider.GetValue(propertyDescriptor.Name).ConvertTo(typeof(HttpPostedFileBase));
-                    
-                    string fileName = "default.png";//Вставляем своё изображение если пользователь не выбрал изображение сам
+                    FileOfWork.FileBase = (HttpPostedFileBase)bindingContext.ValueProvider.GetValue(propertyDescriptor.Name).ConvertTo(typeof(HttpPostedFileBase));
 
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        fileName = Path.GetFileName(file.FileName);
-
-                        var filePath = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/tmp/"), fileName);
-
-                        file.SaveAs(filePath);        
-                    }
-
-                    value = String.Concat("~/Content/tmp/", fileName);
+                    value = FileOfWork.GetPath(String.Format("\\tmp\\{0}\\", controllerContext.RouteData.Values["controller"]));
 
                 break;
                 case "PRICE":
