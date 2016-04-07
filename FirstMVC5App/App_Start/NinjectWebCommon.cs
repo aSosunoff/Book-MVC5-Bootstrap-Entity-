@@ -1,11 +1,9 @@
 using System;
 using System.Web;
 using FirstMVC5App;
-using FirstMVC5App.Model.Engine.Business;
 using FirstMVC5App.Model.Engine.Repository;
 using FirstMVC5App.Model.Engine.Repository.Interface;
 using FirstMVC5App.Model.Engine.Servise;
-using FirstMVC5App.Model.Engine.Servise.Interface;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
@@ -66,7 +64,6 @@ namespace FirstMVC5App
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IServiceLayer>().To<ServiceLayer>();
-            kernel.Bind<IBusinessLayer>().To<BusinessLayer>();
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
         }        
     }

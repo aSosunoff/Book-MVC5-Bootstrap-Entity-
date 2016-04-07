@@ -1,16 +1,22 @@
-﻿using FirstMVC5App.Model.Business.Interface;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using FirstMVC5App.Model.Engine.Repository.Interface;
+using FirstMVC5App.Model.Engine.Servise.Interface;
 using FirstMVC5App.Model.Models;
 
-namespace FirstMVC5App.Model.Engine.Business.Logic
+namespace FirstMVC5App.Model.Engine.Servise.Logic
 {
-    class HistoryBusinessLogic : IHistoryBusinessLogic
+    class HistoryService : BaseService, IHistoryService
     {
-        private readonly IHistoryRepository _historyRepository;
-        public HistoryBusinessLogic(IHistoryRepository historyRepository)
+        private IHistoryRepository _historyRepository;
+        public HistoryService(IUnitOfWork unitOfWork)
         {
-            _historyRepository = historyRepository;
+            _historyRepository = unitOfWork.Get<IHistoryRepository>();
         }
+
         public void AddBook(APP_BOOK item)
         {
             APP_HISTORY appHistory = new APP_HISTORY()

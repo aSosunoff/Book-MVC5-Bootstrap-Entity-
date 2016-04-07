@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
+using FirstMVC5App.Model.Engine.Servise;
 using FirstMVC5App.Model.Engine.Servise.Interface;
 using FirstMVC5App.Model.Models;
 using Newtonsoft.Json;
@@ -14,6 +15,8 @@ namespace FirstMVC5App.Controllers
         public BookController(IServiceLayer serviceLayer)
         {
             ServiceLayer = serviceLayer;
+            ServiceLayer.SetRoot(serviceLayer);
+            
         }
         public ActionResult Index()
         {
@@ -71,7 +74,7 @@ namespace FirstMVC5App.Controllers
         // УБРАТЬ ПОВТОРЕНИЕ КОДА
 
         public ActionResult Edit(int? id)
-        {
+        {//todo: пофиксить загрузку старого изображения когда идём на правку
             if (id == null) return RedirectToAction("Index", "Book");//return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             //APP_BOOK aPP_BOOK = db.APP_BOOK.Find(id);

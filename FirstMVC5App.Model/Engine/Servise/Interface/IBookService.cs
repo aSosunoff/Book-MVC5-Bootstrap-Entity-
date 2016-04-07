@@ -3,7 +3,7 @@ using FirstMVC5App.Model.Models;
 
 namespace FirstMVC5App.Model.Engine.Servise.Interface
 {
-    public interface IBookService
+    public interface IBookService : IBaseService
     {
         IEnumerable<APP_BOOK> GetList();
         void Create(APP_BOOK item);

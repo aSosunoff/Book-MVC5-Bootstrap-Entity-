@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
-using FirstMVC5App.Model.Business.Interface;
-using FirstMVC5App.Model.Engine.Business;
-using FirstMVC5App.Model.Engine.Business.Interface;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
+using FirstMVC5App.Model.Engine.Repository.Interface;
 using FirstMVC5App.Model.Engine.Servise.Interface;
 using FirstMVC5App.Model.Models;
 
@@ -9,39 +11,57 @@ namespace FirstMVC5App.Model.Engine.Servise.Logic
 {
     public class BookService : BaseService, IBookService
     {
-        public BookService(IBusinessLayer businessLayer) : base(businessLayer){}
+        private IBookRepository _bookRepository;
+
+        public BookService(IUnitOfWork unitOfWork)
+        {
+            _bookRepository = unitOfWork.Get<IBookRepository>();
+        }
+
         public IEnumerable<APP_BOOK> GetList()
         {
-            return BusinessLayer.Get<IBookBusinessLogic>().GetBooks();
+            return _bookRepository.GetList().OrderByDescending(x => x.DATE_REG);
         }
 
         public void Create(APP_BOOK item)
         {
-            BusinessLayer.Get<IBookBusinessLogic>().CreateBook(item);
-            BusinessLayer.Get<IHistoryBusinessLogic>().AddBook(item);
+            item.DATE_REG = DateTime.Now;
+            _bookRepository.Create(item);
+            RootServiceLayer.Get<IHistoryService>().AddBook(item);
         }
 
         public APP_BOOK GetItem(int? id)
         {
-            return BusinessLayer.Get<IBookBusinessLogic>().GetBook(id);
+            return _bookRepository.GetItem(id);
         }
 
         public bool IsElement(int? id)
         {
-            return BusinessLayer.Get<IBookBusinessLogic>().IsElement(id);
+            return id != null && GetItem(id) != null;
         }
 
         public void Update(APP_BOOK item)
         {
-            BusinessLayer.Get<IBookBusinessLogic>().Update(item);
-            BusinessLayer.Get<IHistoryBusinessLogic>().UpdateBook(item);
+            item.DATE_UPDATE = DateTime.Now;
+            _bookRepository.Update(item);
+            RootServiceLayer.Get<IHistoryService>().UpdateBook(item);
         }
 
         public void Delete(int? id)
         {
             APP_BOOK appBook = GetItem(id);
-            BusinessLayer.Get<IHistoryBusinessLogic>().DeleteBook(appBook);
-            BusinessLayer.Get<IBookBusinessLogic>().Delete(appBook);
+
+            RootServiceLayer.Get<IHistoryService>().DeleteBook(appBook);
+
+            //:todo имя файла по дефолту употребляется строкой уже 2 раз. Необходимо обойти это что бы не ошибиться при написании
+            string filePath = String.IsNullOrEmpty(appBook.IMG_FILE_PATH) ? String.Empty : Path.Combine(HttpContext.Current.Server.MapPath(appBook.IMG_FILE_PATH));
+            if (File.Exists(filePath) && Path.GetFileName(filePath) != "default.png")
+                File.Delete(filePath);
+            _bookRepository.Delete(appBook);
+
         }
+
+
+
     }
 }

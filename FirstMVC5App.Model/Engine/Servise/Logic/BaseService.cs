@@ -1,17 +1,13 @@
-﻿using FirstMVC5App.Model.Business;
-using FirstMVC5App.Model.Engine.Business;
+﻿using FirstMVC5App.Model.Engine.Servise.Interface;
 
 namespace FirstMVC5App.Model.Engine.Servise.Logic
 {
-    public class BaseService
+    public class BaseService : IBaseService
     {
-        public readonly IBusinessLayer BusinessLayer;
-
-        public BaseService(IBusinessLayer businessLayer)
+        public IServiceLayer RootServiceLayer { get; set; }
+        public void SetRootService(IServiceLayer serviceLayer)
         {
-            BusinessLayer = businessLayer;
+            RootServiceLayer = serviceLayer;
         }
-
-        
     }
 }
