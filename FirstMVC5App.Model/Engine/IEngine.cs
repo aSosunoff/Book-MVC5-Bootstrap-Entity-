@@ -3,7 +3,7 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace FirstMVC5App.Model.Engine
 {
-    public interface IEngineObject : IDisposable
+    public interface IEngine : IDisposable
     {
         T Get<T>();
     }

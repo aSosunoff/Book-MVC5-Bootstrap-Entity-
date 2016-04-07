@@ -7,7 +7,7 @@ using FirstMVC5App.Model.Engine.Repository.Interface;
 
 namespace FirstMVC5App.Model.Engine
 {
-    public class EngineObject : IEngineObject
+    public class Engine : IEngine
     {
         protected Dictionary<Type, Object> Objects = new Dictionary<Type, Object>();
         public T Get<T>()

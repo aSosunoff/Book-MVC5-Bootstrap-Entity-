@@ -10,17 +10,15 @@ namespace FirstMVC5App.Controllers
 {
     public class BookController : Controller
     {
-        private IServiceLayer ServiceLayer { get; set; }
+        private IServiceLayer _ServiceLayer { get; set; }
 
         public BookController(IServiceLayer serviceLayer)
         {
-            ServiceLayer = serviceLayer;
-            ServiceLayer.SetRoot(serviceLayer);
-            
+            _ServiceLayer = ServiceLayer.Instance(serviceLayer); 
         }
         public ActionResult Index()
         {
-            return View(ServiceLayer.Get<IBookService>().GetList());
+            return View(_ServiceLayer.Get<IBookService>().GetList());
         }
 
         public ActionResult Create()
@@ -35,7 +33,7 @@ namespace FirstMVC5App.Controllers
         {
             if (ModelState.IsValid)
             {
-                ServiceLayer.Get<IBookService>().Create(book);
+                _ServiceLayer.Get<IBookService>().Create(book);
 
                 return RedirectToAction("Index");
             }
@@ -56,8 +54,8 @@ namespace FirstMVC5App.Controllers
         {
             if (id == null) return RedirectToAction("Index", "Book");
 
-            if (ServiceLayer.Get<IBookService>().IsElement(id))
-                return View(ServiceLayer.Get<IBookService>().GetItem(id));
+            if (_ServiceLayer.Get<IBookService>().IsElement(id))
+                return View(_ServiceLayer.Get<IBookService>().GetItem(id));
 
             return HttpNotFound();//todo: заменить на свою страницу ошибки
         }
@@ -66,8 +64,8 @@ namespace FirstMVC5App.Controllers
         {
             if (id == null) return RedirectToAction("Index", "Book");
 
-            if (ServiceLayer.Get<IBookService>().IsElement(id))
-                return PartialView(ServiceLayer.Get<IBookService>().GetItem(id));
+            if (_ServiceLayer.Get<IBookService>().IsElement(id))
+                return PartialView(_ServiceLayer.Get<IBookService>().GetItem(id));
 
             return HttpNotFound();//todo: заменить на свою страницу ошибки сообщить, что нет такой книги
         }
@@ -82,8 +80,8 @@ namespace FirstMVC5App.Controllers
             //{
             //    return HttpNotFound();
             //}
-            if (ServiceLayer.Get<IBookService>().IsElement(id))
-                return View(ServiceLayer.Get<IBookService>().GetItem(id));
+            if (_ServiceLayer.Get<IBookService>().IsElement(id))
+                return View(_ServiceLayer.Get<IBookService>().GetItem(id));
             return HttpNotFound();
         }
 
@@ -93,7 +91,7 @@ namespace FirstMVC5App.Controllers
         {
             if (ModelState.IsValid)
             {
-                ServiceLayer.Get<IBookService>().Update(book);
+                _ServiceLayer.Get<IBookService>().Update(book);
                 return RedirectToAction("Index");
             }
             return View(book);
@@ -103,8 +101,8 @@ namespace FirstMVC5App.Controllers
         {
             if (id == null) return RedirectToAction("Index", "Book");//return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             
-            if (ServiceLayer.Get<IBookService>().IsElement(id))
-                return View(ServiceLayer.Get<IBookService>().GetItem(id));
+            if (_ServiceLayer.Get<IBookService>().IsElement(id))
+                return View(_ServiceLayer.Get<IBookService>().GetItem(id));
             return HttpNotFound();
         }
 
@@ -115,14 +113,14 @@ namespace FirstMVC5App.Controllers
         {
             if (id == null) return RedirectToAction("Index", "Book");
 
-            ServiceLayer.Get<IBookService>().Delete(id);
+            _ServiceLayer.Get<IBookService>().Delete(id);
 
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            ServiceLayer.Dispose();
+            _ServiceLayer.Dispose();
             //todo: Возможно надо добавить и на остальных уровнях
             base.Dispose(disposing);
         }
@@ -137,7 +135,7 @@ namespace FirstMVC5App.Controllers
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
 
-            return JsonConvert.SerializeObject(ServiceLayer.Get<IBookService>().GetList(), Formatting.None, jsSettings);
+            return JsonConvert.SerializeObject(_ServiceLayer.Get<IBookService>().GetList(), Formatting.None, jsSettings);
 
             //return Json(ServiceLayer.Get<IBookService>().GetList(), JsonRequestBehavior.AllowGet);
             //todo: Просмотреть что за функция

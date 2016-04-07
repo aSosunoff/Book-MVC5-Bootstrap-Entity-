@@ -4,7 +4,7 @@ using FirstMVC5App.Model.Models;
 
 namespace FirstMVC5App.Model.Engine.Repository
 {
-    public class UnitOfWork : EngineObject, IUnitOfWork
+    public class UnitOfWork : Engine, IUnitOfWork
     {
         private readonly Entities _entityDb = new Entities();
 
