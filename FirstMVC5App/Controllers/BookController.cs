@@ -19,13 +19,15 @@ namespace FirstMVC5App.Controllers
             _ServiceLayer = ServiceLayer.Instance(serviceLayer); 
         }   
 
-        public ActionResult Index(int currentNumberPage = 1)
+        public ActionResult Index( Sort sortModel = null, int page = 1)
         {
-            IEnumerable<APP_BOOK> books = _ServiceLayer.Get<IBookService>().GetList().OrderBy(x => x.DATE_REG);
+            IEnumerable<APP_BOOK> books = _ServiceLayer.Get<IBookService>().GetList();
 
-            PaginatorModel<APP_BOOK> paginatorModel = new PaginatorModel<APP_BOOK>(3, currentNumberPage, books);
+            PaginatorModelSort<APP_BOOK> paginatorModelSort = new PaginatorModelSort<APP_BOOK>(3, page, sortModel, books);
 
-            return View(paginatorModel);
+            //PaginatorModel<APP_BOOK> paginatorModel = new PaginatorModel<APP_BOOK>(3, page, books);
+
+            return View(paginatorModelSort);
         }
 
         public ActionResult Create()

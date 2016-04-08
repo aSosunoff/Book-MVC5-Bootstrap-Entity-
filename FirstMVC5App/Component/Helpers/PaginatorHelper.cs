@@ -11,9 +11,14 @@ namespace FirstMVC5App.Component.Helpers
     public static class PaginatorHelper
     {
         //http://metanit.com/sharp/mvc5/5.13.php
-
+        public static MvcHtmlString DisplayPaginatorLinks(this HtmlHelper helper, string actionName, Sort sortable, Paging paging)
+        {
+            return DisplayPaginatorLinks(helper, actionName, (object)sortable, paging);
+        }
         public static MvcHtmlString DisplayPaginatorLinks(this HtmlHelper helper, string actionName, object routeValueDictionary, Paging paging)
         {
+            const string PAGE_NUMBER = "page";
+            //переменная номера строки
             IDictionary<string, object> dictionary = routeValueDictionary.GetType()
                 .GetProperties()
                 .ToDictionary(
@@ -21,10 +26,6 @@ namespace FirstMVC5App.Component.Helpers
                     x => x.GetValue(routeValueDictionary));
             //todo: в imageHelper посылается атрибут null пофиксить работу метода GetValue
             //todo: возможно понадобиться посыть несколько свойст. Необходимо предусмотреть foreach
-
-
-            TagBuilder div = new TagBuilder("div");
-            div.AddCssClass("text-center");
             
             TagBuilder ul = new TagBuilder("ul");
             ul.AddCssClass("pagination");
@@ -35,19 +36,26 @@ namespace FirstMVC5App.Component.Helpers
 
                 TagBuilder a = new TagBuilder("a");
 
-                if ((i + 1) == (int)dictionary.FirstOrDefault().Value)
+
+                if ((i + 1) == paging.CurrentNumberPage)
                     li.AddCssClass("active");
                 else
-                    a.MergeAttribute("href", Path.Combine(String.Format("/{0}/?{1}={2}", actionName, dictionary.FirstOrDefault().Key, (i + 1))));
+                {
+                    string urlVariable = String.Format("{0}={1}", PAGE_NUMBER, (i + 1));
 
+                    foreach (var variable in dictionary)
+                    {
+                        urlVariable += String.Format("&{0}={1}", variable.Key, variable.Value);
+                    }
+                    a.MergeAttribute("href", Path.Combine(String.Format("/{0}/?{1}", actionName, urlVariable)));
+                }
 
                 a.SetInnerText(Convert.ToString((i + 1)));
                 li.InnerHtml += a.ToString();
                 ul.InnerHtml += li.ToString();
             }
 
-            div.InnerHtml += ul.ToString();
-            return new MvcHtmlString(div.ToString());
+            return new MvcHtmlString(ul.ToString());
         }
     }
 }

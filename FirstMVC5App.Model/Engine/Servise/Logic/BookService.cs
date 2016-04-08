@@ -20,7 +20,7 @@ namespace FirstMVC5App.Model.Engine.Servise.Logic
 
         public IEnumerable<APP_BOOK> GetList()
         {
-            return _bookRepository.GetList().OrderByDescending(x => x.DATE_REG);
+            return _bookRepository.GetList();
         }
 
         public void Create(APP_BOOK item)

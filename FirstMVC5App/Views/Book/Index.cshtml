@@ -1,6 +1,8 @@
-﻿@using FirstMVC5App.Component.Helpers
+﻿@using FirstMVC5App.Component
+@using FirstMVC5App.Component.Helpers
 @using FirstMVC5App.Model.Models
-@model FirstMVC5App.Component.PaginatorModel<APP_BOOK>
+@*@model FirstMVC5App.Component.PaginatorModel<APP_BOOK>*@
+@model FirstMVC5App.Component.PaginatorModelSort<APP_BOOK>
 @{
     ViewBag.Title = "Книги";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -36,14 +38,18 @@
 <table class="table table-striped table-hover ">
     <tr>
         <th></th>
+        @*@Html.DisplayHeaderSort(Model.Element)*@
+        @*todo: поменять на System.Linq.Expressions.Expression<func<TModel, TProperty>> expression*@
+
         <th>
-            @Html.DisplayNameFor(model => model.Element.NAME)
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Element.NAME).ToHtmlString(), "Index", new { sName = Model.Sortable.sName.Revers(), sGanre = Model.Sortable.sGanre, sPrice = Model.Sortable.sPrice, page = Model.Paginator.CurrentNumberPage })
+            
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Element.GANRE)
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Element.GANRE).ToHtmlString(), "Index", new { sName = Model.Sortable.sName, sGanre = Model.Sortable.sGanre.Revers(), sPrice = Model.Sortable.sPrice, page = Model.Paginator.CurrentNumberPage })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Element.PRICE)
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Element.PRICE).ToHtmlString(), "Index", new { sName = Model.Sortable.sName, sGanre = Model.Sortable.sGanre, sPrice = Model.Sortable.sPrice.Revers(), page = Model.Paginator.CurrentNumberPage })
         </th>
         <th></th>
     </tr>
@@ -100,4 +106,7 @@
 
 </table>
 
-@Html.DisplayPaginatorLinks("Book", new{currentNumberPage = Model.Paginator.CurrentNumberPage}, Model.Paginator)
+<div class="text-center">
+    @Html.DisplayPaginatorLinks("Book", Model.Sortable, Model.Paginator)
+</div>
+    
