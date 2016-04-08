@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FirstMVC5App.Component;
 using FirstMVC5App.Model.Engine.Servise;
 using FirstMVC5App.Model.Engine.Servise.Interface;
 using FirstMVC5App.Model.Models;
@@ -15,10 +17,15 @@ namespace FirstMVC5App.Controllers
         public BookController(IServiceLayer serviceLayer)
         {
             _ServiceLayer = ServiceLayer.Instance(serviceLayer); 
-        }
-        public ActionResult Index()
+        }   
+
+        public ActionResult Index(int currentNumberPage = 1)
         {
-            return View(_ServiceLayer.Get<IBookService>().GetList());
+            IEnumerable<APP_BOOK> books = _ServiceLayer.Get<IBookService>().GetList().OrderBy(x => x.DATE_REG);
+
+            PaginatorModel<APP_BOOK> paginatorModel = new PaginatorModel<APP_BOOK>(3, currentNumberPage, books);
+
+            return View(paginatorModel);
         }
 
         public ActionResult Create()
