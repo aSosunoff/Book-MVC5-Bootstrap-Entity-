@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using FirstMVC5App.Model.Engine.Repository.Interface;
 
 namespace FirstMVC5App.Model.Repository
@@ -14,16 +16,33 @@ namespace FirstMVC5App.Model.Repository
         {
             Db = entities;
         }
+
         public void Create(T item)
         {
             Db.Entry(item).State = EntityState.Added;
-            //Db.Set<T>().Add(item);
             Db.SaveChanges();
         }
 
-        public IEnumerable<T> GetList()
+        public void Update(T item)
         {
-            return Db.Set<T>().ToList();
+            Db.Entry(item).State = EntityState.Modified;
+            Db.SaveChanges();
+        }
+
+        public void Delete(T item)
+        {
+            Db.Entry(item).State = EntityState.Deleted;
+            Db.SaveChanges();
+        }
+
+        public IQueryable<T> GetSortList(Expression<Func<T, bool>> predicate)
+        {
+            return Db.Set<T>().Where(predicate);
+        }
+
+        public IEnumerable<T> GetAllList()
+        {
+            return Db.Set<T>();
         }
 
         public T GetItem(params object[] keyValue)
@@ -31,20 +50,9 @@ namespace FirstMVC5App.Model.Repository
             return Db.Set<T>().Find(keyValue);
         }
 
-        public void Update(T item)
+        public T GetItem(Expression<Func<T, bool>> predicate)
         {
-            //todo: проверить как работает
-            Db.Entry(item).State = EntityState.Modified;
-            Db.SaveChanges();
-            //Db.Entry(Db.Set<T>().Find(item));
-            //Db.SaveChanges();
-        }
-
-        public void Delete(T item)
-        {
-            Db.Entry(item).State = EntityState.Deleted;
-            //Db.Set<T>().Remove(item);
-            Db.SaveChanges();
+            return Db.Set<T>().SingleOrDefault(predicate);
         }
     }
 }
